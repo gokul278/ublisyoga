@@ -24,15 +24,12 @@ export default function Registration({ toggleCustomerNavbar }) {
         const searchTerm = searchData.toLowerCase();
 
         return (
-          user.name.toLowerCase().includes(searchTerm) ||
+          user.firstname.toLowerCase().includes(searchTerm) ||
+          user.lastname.toLowerCase().includes(searchTerm) ||
           user.email.toLowerCase().includes(searchTerm) ||
-          user.phoneno.toLowerCase().includes(searchTerm) ||
-          user.signupDate.toLowerCase().includes(searchTerm) ||
+          user.mobileno.toLowerCase().includes(searchTerm) ||
           user.signupTime.toLowerCase().includes(searchTerm) ||
-          user.address.toLowerCase().includes(searchTerm) ||
-          user.state.toLowerCase().includes(searchTerm) ||
-          user.country.toLowerCase().includes(searchTerm) ||
-          user.pincode.toLowerCase().includes(searchTerm)
+          user.signupDate.toLowerCase().includes(searchTerm)
         );
       });
 
@@ -80,26 +77,46 @@ export default function Registration({ toggleCustomerNavbar }) {
                 <div className="w-[95%] flex justify-between mt-3">
                   <div className="w-[48%]">
                     <div class="formContainer">
-                      <input value={modalData.firstname} name="username" id="firstname" type="text" />
+                      <input
+                        value={modalData.firstname}
+                        name="username"
+                        id="firstname"
+                        type="text"
+                      />
                       <label htmlFor="firstname">First Name</label>
                     </div>
                   </div>
                   <div className="w-[48%]">
                     <div class="formContainer">
-                      <input value={modalData.lastname} name="username" id="firstname" type="text" />
+                      <input
+                        value={modalData.lastname}
+                        name="username"
+                        id="firstname"
+                        type="text"
+                      />
                       <label htmlFor="firstname">Last Name</label>
                     </div>
                   </div>
                 </div>
                 <div className="w-[95%] mt-3">
                   <div class="formContainer">
-                    <input value={modalData.email} name="username" id="firstname" type="text" />
+                    <input
+                      value={modalData.email}
+                      name="username"
+                      id="firstname"
+                      type="text"
+                    />
                     <label htmlFor="firstname">Email</label>
                   </div>
                 </div>
                 <div className="w-[95%] mt-3">
                   <div class="formContainer">
-                    <input value={modalData.mobileno} name="username" id="firstname" type="text" />
+                    <input
+                      value={modalData.mobileno}
+                      name="username"
+                      id="firstname"
+                      type="text"
+                    />
                     <label htmlFor="firstname">Mobile Number</label>
                   </div>
                 </div>
