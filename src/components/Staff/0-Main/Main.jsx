@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SideMenu from "../00-SideMenu/SideMenu";
+import SideMenu from "../00-SideMenu/Sidemenu";
 import { Dashboard } from "../01-Dashboard/Dashboard";
 import Registration from "../02-StudentManage/Registration";
 
