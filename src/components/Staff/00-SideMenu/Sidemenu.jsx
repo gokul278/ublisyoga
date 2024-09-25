@@ -59,9 +59,9 @@ export default function SideMenu({ toggleCustomerNavbar, pages, handlePage }) {
                   <div>Students</div>
                   <div>
                     {studentsdropdown ? (
-                      <i class="fa-solid fa-caret-up"></i>
+                      <i className="fa-solid fa-caret-up"></i>
                     ) : (
-                      <i class="fa-solid fa-caret-down"></i>
+                      <i className="fa-solid fa-caret-down"></i>
                     )}
                   </div>
                 </div>
@@ -90,7 +90,7 @@ export default function SideMenu({ toggleCustomerNavbar, pages, handlePage }) {
                       <button className="w-[90%] flex justify-between py-1 ">
                         <div>Registration</div>
                         <div>
-                          <i class="fa-solid fa-user"></i>
+                          <i className="fa-solid fa-user"></i>
                         </div>
                       </button>
                     </div>
@@ -105,7 +105,7 @@ export default function SideMenu({ toggleCustomerNavbar, pages, handlePage }) {
                       <button className="w-[90%] flex justify-between py-1 ">
                         <div>Manage</div>
                         <div>
-                          <i class="fa-solid fa-gears"></i>
+                          <i className="fa-solid fa-gears"></i>
                         </div>
                       </button>
                     </div>
