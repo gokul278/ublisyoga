@@ -1,8 +1,8 @@
 import React from "react";
 
-export const Dashboard = ({toggleCustomerNavbar}) => {
+export const Dashboard = ({ toggleCustomerNavbar }) => {
   return (
-    <div>
+    <div className="w-[95%]">
       <div className="w-[100%] mt-3 flex justify-between lg:justify-center items-center bg-[#f95005] rounded h-[60px]">
         <div className="text-[#fff] font-bold text-[20px] pl-3 lg:pl-0">
           <i className="fa-solid fa-chart-line"></i>

@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function SideMenu({ toggleCustomerNavbar, pages, handlePage }) {
+export default function SideMenu({
+  userdetails,
+  toggleCustomerNavbar,
+  pages,
+  handlePage,
+}) {
   const navigate = useNavigate();
 
   const [studentsdropdown, setStudentsdropdown] = useState(false);
@@ -19,7 +24,9 @@ export default function SideMenu({ toggleCustomerNavbar, pages, handlePage }) {
           >
             <i className="fa-solid fa-xmark"></i>
           </button>
-          <div className="font-semibold text-[18px]">Hi, ZAdroit</div>
+          <div className="font-semibold text-[18px]">
+            Hi, {userdetails.username}
+          </div>
         </div>
         <div className="w-[100%] h-[77vh] overflow-auto flex flex-col justify-between">
           <div className="w-[100%] flex flex-col gap-y-3">
@@ -118,6 +125,7 @@ export default function SideMenu({ toggleCustomerNavbar, pages, handlePage }) {
         <div className="w-[100%] h-[10vh] justify-center items-center">
           <button
             onClick={() => {
+              localStorage.removeItem("JWTtoken");
               navigate("/signin");
             }}
             className="bg-[#f95005] hover:text-[#f95005] w-[100%] text-[#fff] text-[18px] font-semibold py-2 rounded border-2 border-[#f95005] hover:bg-[#f5f7f8] transition-all duration-300"

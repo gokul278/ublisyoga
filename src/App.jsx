@@ -24,8 +24,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { Signin } from "./components/07-Signin/Signin";
 import Signup from "./components/08-Signup/Signup";
-import StudentMain from "./components/User/0-Main/Main";
-import StaffMain from "./components/Staff/0-Main/Main";
+import StudentMain from "./components/09-Student/0-Main/Main";
 
 function App() {
   useEffect(() => {
@@ -56,8 +55,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/student/" element={<StudentMain />} />
-          <Route path="/staff/" element={<StaffMain />} />
+          <Route path="/student" element={<StudentMain />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />

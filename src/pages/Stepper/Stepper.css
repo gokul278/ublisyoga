@@ -49,22 +49,17 @@
   transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55),
     opacity 0.7s ease-in;
 }
-
-/* From Uiverse.io by pablofernz */
 .formContainer {
   height: 100%;
-  /* change the width here if you want */
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column-reverse;
-  /* explanation: Reverse make the label appear visually above the input, when in the HTML it is below so that the "+" selector can work  */
   gap: 2px;
   position: relative;
 }
 
-/* This selects the label inside "formContainer*/
 .formContainer > label {
   font-weight: 500;
   font-size: 16px;
@@ -74,30 +69,17 @@
   transition: all 0.3s ease;
 }
 
-/* This selects the input inside "formContainer*/
-.formContainer > input {
-  width: 100%;
-  height: 40px;
-  border-radius: 5px;
-  font-weight: 900px;
-  background-color: transparent;
-  color: #45474b;
-  border: 2px solid #b3b4b6;
-  padding: 2px 10px;
-  font-size: 15px;
-  transition: all 0.3s ease;
-  z-index: 5;
-}
-
-
+.formContainer > select,
+.formContainer > input,
 .formContainer > button {
   width: 100%;
   height: 40px;
   border-radius: 5px;
-  font-weight: 900px;
+  /* font-weight: 900; */
   background-color: transparent;
   color: #45474b;
   border: 2px solid #b3b4b6;
+  padding: 2px 10px;
   font-size: 15px;
   transition: all 0.3s ease;
   z-index: 5;
@@ -105,9 +87,9 @@
 
 .formContainer > textarea {
   width: 100%;
-  height: 60px;
+  height: 80px;
   border-radius: 5px;
-  font-weight: 900px;
+  /* font-weight: 900; */
   background-color: transparent;
   color: #45474b;
   border: 2px solid #b3b4b6;
@@ -117,9 +99,10 @@
   z-index: 5;
 }
 
-/* If you give the input a class, this would be equal to: 
-  .input:focus */
-.formContainer > input:focus {
+.formContainer > input:focus,
+.formContainer > textarea:focus,
+.formContainer > select:focus,
+.formContainer > button:focus {
   color: #4c4c4e;
   outline: none;
   border: 2px solid #ff5001;
@@ -127,12 +110,12 @@
     0px 0px 5px rgba(255, 255, 255, 0.145) inset;
 }
 
-.formContainer > textarea:focus {
-  color: #4c4c4e;
-  outline: none;
-  border: 2px solid #ff5001;
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.145),
-    0px 0px 5px rgba(255, 255, 255, 0.145) inset;
+/* Changing the label color when focus on inputs */
+.formContainer > input:focus + label,
+.formContainer > textarea:focus + label,
+.formContainer > select:focus + label {
+  color: #ff5001;
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.145);
 }
 
 .formContainer > button:hover {
@@ -143,41 +126,42 @@
     0px 0px 5px rgba(255, 255, 255, 0.145) inset;
 }
 
-
-/* This would be equal to: .input:focus+.label */
-.formContainer > input:focus + label {
-  color: #ff5001;
-  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.145);
-}
-
-/* This would be equal to: .input:focus+.label */
-.formContainer > textarea:focus + label {
-  color: #ff5001;
-  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.145);
-}
-
-
-.formContainer > button:focus + label {
-  color: #ff5001;
-  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.145);
-}
-
-/* This would be equal to: .input::placeholder */
-.formContainer > input::placeholder {
-  color: rgb(85, 85, 85);
-  transition: all 0.5s ease;
-}
-
-.formContainer > textarea::placeholder {
-  color: rgb(85, 85, 85);
-  transition: all 0.5s ease;
-}
-/* This would be equal to: .input:focus::placeholder */
-.formContainer > input:focus::placeholder {
-  color: rgb(150, 150, 150);
-}
-
-.formContainer > textarea:focus::placeholder {
-  color: rgb(150, 150, 150);
-}
 /* <thx/> */
+
+.loadersvg {
+  width: 45px;
+  transform-origin: center;
+  animation: rotate4 2s linear infinite;
+}
+
+.loadercircle {
+  fill: none;
+  stroke: #ff5001;
+  stroke-width: 5;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash4 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate4 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash4 {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}
