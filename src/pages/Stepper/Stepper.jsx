@@ -3,6 +3,9 @@ import "./Stepper.css";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import CryptoJS from "crypto-js";
+import TextInput from "../Inputs/TextInput";
+import PasswordInput from "../Inputs/PasswordInput";
+import ErrorMessage from "../Messages/ErrorMessage";
 
 export const Stepper = () => {
   const navigate = useNavigate();
@@ -255,7 +258,7 @@ export const Stepper = () => {
   return (
     <div className="w-[100%]">
       <div
-        className="w-[100%] rounded bg-[#f8f9fa]"
+        className="w-[100%] rounded bg-[#fff]"
         style={{ boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px" }}
       >
         {stepperactive === 1 && (
@@ -265,72 +268,70 @@ export const Stepper = () => {
             </h1>
             <div className="w-[100%] h-[45vh] flex flex-col justify-center">
               <div className="w-[100%] py-1" align="center">
-                <div className="w-[90%] lg:w-[80%] flex justify-between">
+                <div className="w-[90%] mb-5 lg:w-[80%] flex justify-between">
                   <div className="w-[49%]" align="start">
-                    <div className="formContainer">
-                      <input
-                        id="firstname"
-                        name="fname"
-                        value={input.fname}
-                        onInput={handleinput}
-                        type="text"
-                      />
-                      <label htmlFor="firstname">First Name</label>
-                    </div>
+                    <TextInput
+                      id="firstname"
+                      name="fname"
+                      type="text"
+                      label="First Name"
+                      placeholder="Write your message"
+                      required
+                      value={input.fname}
+                      onChange={handleinput}
+                    />
                   </div>
-                  <div className="w-[49%] relative my-2">
-                    <div className="formContainer">
-                      <input
-                        id="firstname"
-                        name="lname"
-                        value={input.lname}
-                        onInput={handleinput}
-                        type="text"
-                      />
-                      <label htmlFor="firstname">Last Name</label>
-                    </div>
+                  <div className="w-[49%] relative">
+                    <TextInput
+                      id="lastname"
+                      name="lname"
+                      type="text"
+                      label="Last Name"
+                      placeholder="Write your message"
+                      required
+                      value={input.lname}
+                      onChange={handleinput}
+                    />
                   </div>
                 </div>
               </div>
               <div className="w-[100%]" align="center">
-                <div className="w-[90%] lg:w-[80%] flex justify-between">
+                <div className="w-[90%] mb-3 lg:w-[80%] flex justify-between">
                   <div className="w-[100%]" align="start">
-                    <div className="formContainer">
-                      <input
-                        id="firstname"
-                        value={input.dob}
-                        onInput={handleinputdob}
-                        name="dob"
-                        type="date"
-                      />
-                      <label htmlFor="firstname">Date of Birth</label>
-                    </div>
+                    <TextInput
+                      id="dob"
+                      name="dob"
+                      type="date"
+                      label="Date of Birth"
+                      placeholder="Write your message"
+                      required
+                      value={input.dob}
+                      onChange={handleinput}
+                    />
                   </div>
                 </div>
               </div>
               <div className="pt-3 w-[100%]" align="center">
                 <div className="w-[90%] lg:w-[80%] flex justify-between">
                   <div className="w-[100%]" align="start">
-                    <div className="formContainer">
-                      <input
-                        id="firstname"
-                        value={input.phoneno}
-                        onInput={handleinput}
-                        name="phoneno"
-                        type="text"
-                      />
-                      <label htmlFor="firstname">Phone Number</label>
-                    </div>
+                    <TextInput
+                      id="phoneno"
+                      name="phoneno"
+                      type="tel"
+                      label="Phone Number"
+                      placeholder="Write your message"
+                      required
+                      value={input.phoneno}
+                      onChange={handleinput}
+                    />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="w-full -mt-2 font-semibold">
+            <div className="w-full -mt-4 font-semibold">
               <div className="w-[90%] lg:w-[80%] transition-all duration-300">
                 {formerror1.errorstatus ? (
-                  <div className="py-2 bg-[#ED5555] text-[#fff] rounded  transition-all duration-300">
-                    {formerror1.errormessage}
-                  </div>
+                  <ErrorMessage message={formerror1.errormessage}/>
                 ) : null}
               </div>
             </div>
@@ -356,80 +357,53 @@ export const Stepper = () => {
               <div className="w-[100%]" align="center">
                 <div className="w-[90%] lg:w-[80%] flex justify-between">
                   <div className="w-[100%]" align="start">
-                    <div className="formContainer">
-                      <input
-                        id="firstname"
-                        name="email"
-                        value={input.email}
-                        onInput={handleinput}
-                        type="tel"
-                      />
-                      <label htmlFor="firstname">E-Mail</label>
-                    </div>
+                    <TextInput
+                      id="email"
+                      name="email"
+                      label="Email ID"
+                      placeholder="Write your message"
+                      required
+                      value={input.email}
+                      onChange={handleinput}
+                    />
                   </div>
                 </div>
               </div>
-              <div className="w-full mt-3" align="center">
+              <div className="w-[100%]" align="center">
                 <div className="w-[90%] lg:w-[80%] flex justify-between">
-                  <div className=" w-[82%] lg:w-[88%]" align="start">
-                    <div className="formContainer">
-                      <input
-                        name="password"
-                        value={input.password}
-                        onInput={handleinput}
-                        id="firstname"
-                        type={hiddenpasswordStatus ? "text" : "password"}
-                      />
-                      <label htmlFor="firstname">Password</label>
-                    </div>
-                  </div>
-                  <div className="w-[15%] lg:w-[10%]" align="start">
-                    <div className="formContainer">
-                      {hiddenpasswordStatus ? (
-                        <button
-                          className="mt-4"
-                          onClick={() => {
-                            setHiddenpasswordStatus(false);
-                          }}
-                        >
-                          <i className="fa-regular fa-eye-slash"></i>
-                        </button>
-                      ) : (
-                        <button
-                          className="mt-4"
-                          onClick={() => {
-                            setHiddenpasswordStatus(true);
-                          }}
-                        >
-                          <i className="fa-regular fa-eye"></i>
-                        </button>
-                      )}
-                    </div>
+                  <div className="w-[100%] mt-4" align="start">
+                    <PasswordInput
+                      id="password"
+                      name="password"
+                      label="Password"
+                      value={input.password}
+                      onChange={handleinput}
+                      helperText="Password should be at least 8 characters."
+                      maxLength={30}
+                    />
                   </div>
                 </div>
               </div>
-              <div className="mt-3 w-[100%]" align="center">
+              <div className="w-[100%]" align="center">
                 <div className="w-[90%] lg:w-[80%] flex justify-between">
-                  <div className="w-[100%]" align="start">
-                    <div className="formContainer">
-                      <input
-                        name="repassword"
-                        onInput={handleinput}
-                        id="firstname"
-                        type="password"
-                      />
-                      <label htmlFor="firstname">Confirm Password</label>
-                    </div>
+                  <div className="w-[100%] mt-4" align="start">
+                    <PasswordInput
+                      id="repassword"
+                      name="repassword"
+                      label="Confirm Password"
+                      value={input.repassword}
+                      onChange={handleinput}
+                      helperText="Password should be at least 8 characters."
+                      maxLength={30}
+                    />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="w-full -mt-2 font-semibold">
+            <div className="w-full -mt-5 font-semibold">
               <div className="w-[90%] lg:w-[80%] transition-all duration-300">
                 {formerror2.errorstatus ? (
-                  <div className="py-2 bg-[#ED5555] text-[#fff] rounded  transition-all duration-300">
-                    {formerror2.errormessage}
-                  </div>
+                  <ErrorMessage message={formerror2.errormessage}/>
                 ) : null}
               </div>
             </div>
