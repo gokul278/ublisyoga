@@ -47,6 +47,7 @@ export const Stepper = () => {
     age: "",
     phoneno: "",
     email: "",
+    username: "",
     password: "",
     repassword: "",
   });
@@ -152,6 +153,24 @@ export const Stepper = () => {
       return 0;
     }
 
+    if (input.email.length <= 0) {
+      setFormerror1({
+        errorstatus: true,
+        errormessage: "Enter Email",
+      });
+
+      return 0;
+    }
+
+    if (!verifyEmail(input.email)) {
+      setFormerror1({
+        errorstatus: true,
+        errormessage: "Enter Valid Email",
+      });
+
+      return 0;
+    }
+
     setStepperactive((prev) => (prev < 2 ? prev + 1 : prev));
   };
 
@@ -169,23 +188,23 @@ export const Stepper = () => {
   });
 
   const submitform2 = () => {
-    if (input.email.length <= 0) {
-      setFormerror2({
-        errorstatus: true,
-        errormessage: "Enter Email",
-      });
+    // if (input.email.length <= 0) {
+    //   setFormerror2({
+    //     errorstatus: true,
+    //     errormessage: "Enter Email",
+    //   });
 
-      return 0;
-    }
+    //   return 0;
+    // }
 
-    if (!verifyEmail(input.email)) {
-      setFormerror2({
-        errorstatus: true,
-        errormessage: "Enter Valid Email",
-      });
+    // if (!verifyEmail(input.email)) {
+    //   setFormerror2({
+    //     errorstatus: true,
+    //     errormessage: "Enter Valid Email",
+    //   });
 
-      return 0;
-    }
+    //   return 0;
+    // }
 
     if (input.password.length <= 0) {
       setFormerror2({
@@ -232,6 +251,7 @@ export const Stepper = () => {
       age: input.age,
       phoneno: input.phoneno,
       email: input.email,
+      username: input.username,
       password: input.password,
     }).then((res) => {
       const data = decrypt(
@@ -263,12 +283,12 @@ export const Stepper = () => {
       >
         {stepperactive === 1 && (
           <>
-            <h1 className="py-5 text-[#ff5001] text-[25px] font-bold">
+            <h1 className="pt-4 text-[#ff5001] text-[25px] font-bold">
               Your Personal Deatils
             </h1>
             <div className="w-[100%] h-[45vh] flex flex-col justify-center">
-              <div className="w-[100%] py-1" align="center">
-                <div className="w-[90%] mb-5 lg:w-[80%] flex justify-between">
+              <div className="w-[100%]" align="center">
+                <div className="w-[90%] mb-4 lg:w-[80%] flex justify-between">
                   <div className="w-[49%]" align="start">
                     <TextInput
                       id="firstname"
@@ -297,7 +317,19 @@ export const Stepper = () => {
               </div>
               <div className="w-[100%]" align="center">
                 <div className="w-[90%] mb-3 lg:w-[80%] flex justify-between">
-                  <div className="w-[100%]" align="start">
+                  <div className="w-[49%]" align="start">
+                    <TextInput
+                      id="phoneno"
+                      name="phoneno"
+                      type="tel"
+                      label="Phone Number"
+                      placeholder="Write your message"
+                      required
+                      value={input.phoneno}
+                      onChange={handleinput}
+                    />
+                  </div>
+                  <div className="w-[49%] relative">
                     <TextInput
                       id="dob"
                       name="dob"
@@ -311,27 +343,27 @@ export const Stepper = () => {
                   </div>
                 </div>
               </div>
-              <div className="pt-3 w-[100%]" align="center">
+
+              <div className="pt-2 w-[100%]" align="center">
                 <div className="w-[90%] lg:w-[80%] flex justify-between">
                   <div className="w-[100%]" align="start">
                     <TextInput
-                      id="phoneno"
-                      name="phoneno"
-                      type="tel"
-                      label="Phone Number"
+                      id="email"
+                      name="email"
+                      label="Email ID"
                       placeholder="Write your message"
                       required
-                      value={input.phoneno}
+                      value={input.email}
                       onChange={handleinput}
                     />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="w-full -mt-4 font-semibold">
+            <div className="w-full -mt-10 font-semibold">
               <div className="w-[90%] lg:w-[80%] transition-all duration-300">
                 {formerror1.errorstatus ? (
-                  <ErrorMessage message={formerror1.errormessage}/>
+                  <ErrorMessage message={formerror1.errormessage} />
                 ) : null}
               </div>
             </div>
@@ -350,7 +382,7 @@ export const Stepper = () => {
         )}
         {stepperactive === 2 && (
           <>
-            <h1 className="py-5 text-[#ff5001] text-[25px] font-bold">
+            <h1 className="pt-4 text-[#ff5001] text-[25px] font-bold">
               Your Login Details
             </h1>
             <div className="w-[100%] h-[45vh] flex flex-col justify-center">
@@ -358,12 +390,12 @@ export const Stepper = () => {
                 <div className="w-[90%] lg:w-[80%] flex justify-between">
                   <div className="w-[100%]" align="start">
                     <TextInput
-                      id="email"
-                      name="email"
-                      label="Email ID"
+                      id="username"
+                      name="username"
+                      label="Username"
                       placeholder="Write your message"
                       required
-                      value={input.email}
+                      value={input.username}
                       onChange={handleinput}
                     />
                   </div>
@@ -400,10 +432,10 @@ export const Stepper = () => {
                 </div>
               </div>
             </div>
-            <div className="w-full -mt-5 font-semibold">
+            <div className="w-full -mt-10 font-semibold">
               <div className="w-[90%] lg:w-[80%] transition-all duration-300">
                 {formerror2.errorstatus ? (
-                  <ErrorMessage message={formerror2.errormessage}/>
+                  <ErrorMessage message={formerror2.errormessage} />
                 ) : null}
               </div>
             </div>

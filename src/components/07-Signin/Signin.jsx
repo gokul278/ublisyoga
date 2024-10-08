@@ -3,6 +3,7 @@ import logo from "../../assets/logo/logo.jpeg";
 import { useNavigate } from "react-router-dom";
 import TextInput from "../../pages/Inputs/TextInput";
 import PasswordInput from "../../pages/Inputs/PasswordInput";
+import NormalButton from "../../pages/Buttons/NormalButton";
 
 export const Signin = () => {
   const navigate = useNavigate();
@@ -35,13 +36,15 @@ export const Signin = () => {
           <div className="w-[100%] mt-4" align="start">
             <TextInput
               id="userid"
-              name="id-l01"
+              name="username"
               label="User ID"
               placeholder="Write your message"
               rows={3}
               required
-              // value={address}
-              // onChange={(e) => setAddress(e.target.value)}
+              value={inputs.username}
+              onChange={(e) => {
+                handleinput(e);
+              }}
             />
           </div>
           <div className="w-[100%] my-4" align="start">
@@ -50,7 +53,9 @@ export const Signin = () => {
               name="password"
               label="Password"
               value={inputs.password}
-              onChange={handleinput}
+              onChange={(e) => {
+                handleinput(e);
+              }}
               helperText="Password should be at least 8 characters."
               maxLength={30}
             />
@@ -65,16 +70,22 @@ export const Signin = () => {
             Forgot Password ?
           </div>
           <div className="w-[100%] mt-3">
-            <button
+            <NormalButton
+              onClick={() => {
+                navigate("/student");
+              }}
+              label="Sign In"
+            />
+            {/* <button
               onClick={() => {
                 navigate("/student");
               }}
               className="bg-[#ff5001] border-2 border-[#ff5001] text-[#fff] font-semibold w-[100%] py-2 rounded transition-colors duration-300 ease-in-out hover:bg-[#fff] hover:text-[#ff5001]"
             >
               Sign In
-            </button>
+            </button> */}
           </div>
-          <div className="mt-5">
+          <div className="mt-4">
             <h1
               className="text-[#000] cursor-pointer text-[18px] font-semibold"
               onClick={() => {

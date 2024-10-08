@@ -278,6 +278,7 @@ const RegistrationStepper = () => {
               >
                 <CheckboxInput
                   checked={addessschecked}
+                  id="bothaddress"
                   label="Both Temporary & Permanent Addresses are the same."
                   onChange={() => {
                     addessschecked
