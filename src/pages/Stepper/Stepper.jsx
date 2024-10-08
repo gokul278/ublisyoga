@@ -188,23 +188,14 @@ export const Stepper = () => {
   });
 
   const submitform2 = () => {
-    // if (input.email.length <= 0) {
-    //   setFormerror2({
-    //     errorstatus: true,
-    //     errormessage: "Enter Email",
-    //   });
+    if (input.username.length < 6) {
+      setFormerror2({
+        errorstatus: true,
+        errormessage: "Username Must be Above 6 Characters",
+      });
 
-    //   return 0;
-    // }
-
-    // if (!verifyEmail(input.email)) {
-    //   setFormerror2({
-    //     errorstatus: true,
-    //     errormessage: "Enter Valid Email",
-    //   });
-
-    //   return 0;
-    // }
+      return 0;
+    }
 
     if (input.password.length <= 0) {
       setFormerror2({
