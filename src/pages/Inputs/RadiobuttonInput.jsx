@@ -6,6 +6,7 @@ const RadiobuttonInput = ({
   name,
   selectedOption = "yes",
   onChange,
+  required,
   label,
 }) => {
   return (
@@ -19,6 +20,7 @@ const RadiobuttonInput = ({
         name={name}
         checked={selectedOption === value}
         onChange={onChange}
+        required={required}
       />
       <label
         className="pl-2 cursor-pointer text-[#4d4f53] font-semibold peer-disabled:cursor-not-allowed peer-disabled:text-slate-400"

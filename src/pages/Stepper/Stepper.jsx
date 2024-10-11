@@ -235,35 +235,52 @@ export const Stepper = () => {
 
     setSubmitloadingStatus(true);
 
-    Axios.post(import.meta.env.VITE_API_URL + "register", {
-      fname: input.fname,
-      lname: input.lname,
-      dob: input.dob,
-      age: input.age,
-      phoneno: input.phoneno,
-      email: input.email,
-      username: input.username,
-      password: input.password,
-    }).then((res) => {
-      const data = decrypt(
-        res.data.encryptedData,
-        res.data.iv,
-        import.meta.env.VITE_ENCRYPTION_KEY
-      );
+    Axios.post(import.meta.env.VITE_API_URL + "users/signup", {
+      temp_su_fname: input.fname,
+      temp_su_lname: input.lname,
+      temp_su_dob: input.dob,
+      temp_su_age: input.age,
+      temp_su_phone: input.phoneno,
+      temp_su_email: input.email,
+      temp_su_username: input.username,
+      temp_su_password: input.password,
+    })
+      .then((res) => {
 
-      if (data.status === "success") {
-        setSuccessState(true);
-        setTimeout(() => {
-          navigate("/signin");
-        }, 1500);
-      } else if (data.status === "error") {
-        setSubmitloadingStatus(false);
+        const data = decrypt(
+          res.data[1],
+          res.data[0],
+          import.meta.env.VITE_ENCRYPTION_KEY
+        );
+
+        if (data.success) {
+          console.log("True part");
+          setSuccessState(true);
+          setTimeout(() => {
+            navigate("/signin");
+          }, 1500);
+        } else {
+          // If status is false in the response or an error status, handle it
+          console.log("False part");
+          setSubmitloadingStatus(false); // Turn off the loading spinner
+          setFormerror2({
+            errorstatus: true,
+            errormessage:
+              data.message || "An error occurred during signup.",
+          });
+        }
+      })
+      .catch((err) => {
+        // Catching any 400 status or general errors
+        console.error("Error: ", err);
+        setSubmitloadingStatus(false); // Turn off the loading spinner
         setFormerror2({
           errorstatus: true,
-          errormessage: data.message,
+          errormessage:
+            err.response?.data?.message ||
+            "Something went wrong. Please try again.",
         });
-      }
-    });
+      });
   };
 
   return (
@@ -329,7 +346,7 @@ export const Stepper = () => {
                       placeholder="Write your message"
                       required
                       value={input.dob}
-                      onChange={handleinput}
+                      onChange={handleinputdob}
                     />
                   </div>
                 </div>

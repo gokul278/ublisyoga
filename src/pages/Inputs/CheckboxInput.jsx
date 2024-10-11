@@ -4,11 +4,12 @@ export default function CheckboxInput({
   checked,
   label,
   onChange,
+  required = false,
   disabled = false,
   id,
 }) {
   return (
-    <div className="flex justify-start items-center">
+    <div className="flex w-full justify-start items-center">
       <input
         className="peer h-[20px] w-[20px] cursor-pointer appearance-none rounded-full border-4 border-[#b3b4b6] bg-white transition-colors checked:border-[#ff5001] checked:bg-[#ff5001] checked:hover:border-[#ff5001] checked:hover:bg-[#ff5001] focus:outline-none checked:focus:border-[#ff5001] checked:focus:bg-[#ff5001] focus-visible:outline-none disabled:cursor-not-allowed disabled:border-slate-100 disabled:bg-slate-50"
         type="checkbox"
@@ -16,9 +17,10 @@ export default function CheckboxInput({
         onChange={onChange}
         id={id} // Make sure to use the id prop here
         disabled={disabled}
+        required={required}
       />
       <label
-        className={`cursor-pointer pl-2 text-slate-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 ${
+        className={`cursor-pointer w-full pl-2 text-slate-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 ${
           disabled ? "text-slate-400" : "text-[#4d4f53] font-semibold"
         }`}
         htmlFor={id} // Use the id here too
@@ -26,7 +28,7 @@ export default function CheckboxInput({
         {label}
       </label>
       <svg
-        className="pointer-events-none absolute left-0 top-1 h-4 w-4 -rotate-90 fill-[#ff5001] stroke-[#ff5001] opacity-0 transition-all duration-300 peer-checked:rotate-0 peer-checked:opacity-100 peer-disabled:cursor-not-allowed"
+        className="pointer-events-none absolute left-0 top-1 h-[20px] w-[20px] -rotate-90 fill-[#ff5001] stroke-[#ff5001] opacity-0 transition-all duration-300 peer-checked:rotate-0 peer-checked:opacity-100 peer-disabled:cursor-not-allowed"
         viewBox="0 0 16 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
