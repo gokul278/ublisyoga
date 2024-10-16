@@ -20,14 +20,14 @@ const PasswordInput = ({
         type={showPassword ? "text" : "password"}
         name={name}
         placeholder={placeholder}
-        className="peer relative h-12 w-full rounded border-2 border-[#b3b4b6] px-3 pr-12 text-[#4c4c4e] placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-[#ff5001] focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+        className="peer relative h-10 w-full rounded border-2 border-[#b3b4b6] px-3 pr-12 text-[#4c4c4e] placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-[#ff5001] focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
         value={value}
         onChange={onChange}
         disabled={disabled}
       />
       <label
         htmlFor={id}
-        className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-[14px] text-[#4c4c4e] transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-autofill:-top-2 peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-[14px] peer-focus:text-[#ff5001] peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+        className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-[#4c4c4e] transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:text-[14px] peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:cursor-default peer-focus:text-[14px] peer-focus:text-[#ff5001] peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
       >
         {label}
       </label>
@@ -35,7 +35,7 @@ const PasswordInput = ({
         <svg
           onClick={() => setShowPassword(!showPassword)}
           xmlns="http://www.w3.org/2000/svg"
-          className="absolute top-3 right-3 h-6 w-5 cursor-pointer stroke-slate-400 peer-disabled:cursor-not-allowed"
+          className="absolute top-2 right-3 h-6 w-5 cursor-pointer stroke-slate-400 peer-disabled:cursor-not-allowed"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -58,7 +58,7 @@ const PasswordInput = ({
         <svg
           onClick={() => setShowPassword(!showPassword)}
           xmlns="http://www.w3.org/2000/svg"
-          className="absolute top-3 right-3 h-6 w-5 cursor-pointer stroke-slate-400 peer-disabled:cursor-not-allowed"
+          className="absolute top-2 right-3 h-6 w-5 cursor-pointer stroke-slate-400 peer-disabled:cursor-not-allowed"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -73,7 +73,7 @@ const PasswordInput = ({
           />
         </svg>
       )}
-      {/* <small className="absolute flex w-full justify-between px-4 py-1 text-xs text-slate-400 transition peer-invalid:text-pink-500">
+      {/* <small className="absolute flex w-full justify-between px-4 py-1 text-[14px] text-slate-400 transition peer-invalid:text-pink-500">
         <span>{helperText}</span>
         <span className="text-slate-500">{`${value.length}/${maxLength}`}</span>
       </small> */}

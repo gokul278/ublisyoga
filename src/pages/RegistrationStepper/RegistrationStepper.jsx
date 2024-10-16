@@ -197,12 +197,20 @@ const RegistrationStepper = () => {
   };
 
   const handleInput = (e) => {
-    console.log(e.target.name);
-
     setInputs({
       ...inputs,
       [e.target.name]: e.target.value,
     });
+
+    if (inputs.addressboth) {
+      setInputs({
+        ...inputs,
+        tempaddess: inputs.peraddress,
+        tempstate: inputs.perstate,
+        tempincode: inputs.perpincode,
+        tempcity: inputs.percity,
+      });
+    }
   };
 
   const submitForm = () => {
@@ -220,7 +228,6 @@ const RegistrationStepper = () => {
       import.meta.env.VITE_API_URL + "profile/RegisterData",
 
       {
-        refStId: 15,
         address: {
           addresstype: inputs.addressboth,
           refAdAdd1: inputs.peraddress,
@@ -235,6 +242,13 @@ const RegistrationStepper = () => {
           refAdPincode2: inputs.tempincode,
         },
         personalData: {
+          ref_su_fname: inputs.fname,
+          ref_su_lname: inputs.lname,
+          ref_su_mailid: inputs.email,
+          ref_su_phoneno: inputs.phoneno,
+          ref_su_Whatsapp: inputs.whatsappno,
+          ref_su_dob: inputs.dob,
+          ref_su_age: inputs.age,
           ref_su_gender: inputs.gender,
           ref_su_qulify: inputs.qualification,
           ref_su_occu: inputs.occupation,
@@ -281,7 +295,6 @@ const RegistrationStepper = () => {
           import.meta.env.VITE_ENCRYPTION_KEY
         );
 
-
         if (data.success) {
           navigate("/");
         }
@@ -313,7 +326,7 @@ const RegistrationStepper = () => {
               </div>
               <hr />
               <div className="w-full h-[73vh] overflow-y-auto">
-                <div className="w-[90%] mb-4 mt-3" align="start">
+                <div className="w-[90%] mb-[15px] mt-3" align="start">
                   <TextInput
                     id="userid"
                     type="text"
@@ -327,7 +340,7 @@ const RegistrationStepper = () => {
                   />
                 </div>
 
-                <div className="w-[90%] mb-4" align="start">
+                <div className="w-[90%] mb-[15px]" align="start">
                   <TextInput
                     id="emailid"
                     type="email"
@@ -340,7 +353,7 @@ const RegistrationStepper = () => {
                   />
                 </div>
                 <div
-                  className="w-[90%] mb-4 flex justify-between"
+                  className="w-[90%] mb-[15px] flex justify-between"
                   align="start"
                 >
                   <div className="w-[48%]">
@@ -370,7 +383,7 @@ const RegistrationStepper = () => {
                 </div>
 
                 <div
-                  className="w-[90%] mb-4 flex flex-wrap gap-y-5 justify-between"
+                  className="w-[90%] mb-[15px] flex flex-wrap gap-y-5 justify-between"
                   align="start"
                 >
                   <div className="w-[100%] lg:w-[40%]">
@@ -411,7 +424,7 @@ const RegistrationStepper = () => {
                 </div>
 
                 <div
-                  className="w-[90%] mb-4 flex justify-between"
+                  className="w-[90%] mb-[15px] flex justify-between"
                   align="start"
                 >
                   <div className="w-[68%]">
@@ -440,7 +453,7 @@ const RegistrationStepper = () => {
                   </div>
                 </div>
                 <div
-                  className="w-[90%] mb-4 flex justify-between"
+                  className="w-[90%] mb-[15px] flex justify-between"
                   align="start"
                 >
                   <SelectInput
@@ -456,7 +469,7 @@ const RegistrationStepper = () => {
                     onChange={(e) => handleInput(e)}
                   />
                 </div>
-                <div className="w-[90%] mb-4" align="start">
+                <div className="w-[90%] mb-[15px]" align="start">
                   <TextInput
                     id="father"
                     type="text"
@@ -470,7 +483,7 @@ const RegistrationStepper = () => {
                 </div>
 
                 <div
-                  className="w-[90%] mb-4 flex justify-between"
+                  className="w-[90%] mb-[15px] flex justify-between"
                   align="start"
                 >
                   <div className="w-[48%]">
@@ -498,8 +511,8 @@ const RegistrationStepper = () => {
                     />
                   </div>
                 </div>
-                <div
-                  className="w-[90%] mb-4 flex justify-between items-center"
+                {/* <div
+                  className="w-[90%] mb-[15px] flex justify-between items-center"
                   align="start"
                 >
                   <CheckboxInput
@@ -522,18 +535,18 @@ const RegistrationStepper = () => {
                       }
                     }}
                   />
-                </div>
+                </div> */}
 
                 <div
                   className="w-[90%] mb-2 flex flex-col justify-between"
                   align="start"
                 >
                   <div className="w-full" align="center">
-                    <label className="text-[#45474b] mb-4 text-[18px] font-semibold">
+                    <label className="text-[#45474b] mb-[15px] text-[18px] font-semibold">
                       Permanent Address
                     </label>
-                    <div className="mb-3">
-                      <TextareaInput
+                    <div className="mb-[15px]">
+                      <TextInput
                         id="tempaddress"
                         name="peraddress"
                         label="Residental Address *"
@@ -545,7 +558,7 @@ const RegistrationStepper = () => {
                       />
                     </div>
                     <div
-                      className="w-[100%] mb-4 flex justify-between"
+                      className="w-[100%] mb-[15px] flex justify-between"
                       align="start"
                     >
                       <div className="w-[48%]">
@@ -556,7 +569,7 @@ const RegistrationStepper = () => {
                             required
                             value={inputs.perstate}
                             onChange={handleStateChange}
-                            className="relative w-full h-11 px-3 transition-all bg-white border-2 rounded outline-none appearance-none peer border-[#b3b4b6] text-[#4c4c4e] autofill:bg-white focus:border-[#ff5001] focus:focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                            className="relative w-full h-10 px-3 transition-all bg-white border-2 rounded outline-none appearance-none peer border-[#b3b4b6] text-[#4c4c4e] autofill:bg-white focus:border-[#ff5001] focus:focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
                           >
                             <option value="" disabled selected></option>
                             {states.map((state) => (
@@ -567,7 +580,7 @@ const RegistrationStepper = () => {
                           </select>
                           <label
                             htmlFor="permanentstate"
-                            className="pointer-events-none absolute top-3 left-2 z-[1] px-2 text-[14px] text-[#4c4c4e] transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-required:after:text-[#000000] peer-valid:-top-2 peer-valid:text-[14px] peer-focus:-top-2 peer-focus:text-[14px] peer-focus:text-[#ff5001] peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+                            className="pointer-events-none absolute left-2 z-[1] -top-2 px-2 text-[14px] text-[#4c4c4e] transition-all before:absolute before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-required:after:text-[#000000] peer-valid:text-[14px] peer-focus:text-[14px] peer-focus:text-[#ff5001] peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
                           >
                             State *
                           </label>
@@ -588,7 +601,7 @@ const RegistrationStepper = () => {
                               });
                             }}
                             disabled={!selectedState}
-                            className="relative w-full h-11 px-3 transition-all bg-white border-2 rounded outline-none appearance-none peer border-[#b3b4b6] text-[#4c4c4e] autofill:bg-white focus:border-[#ff5001] focus:focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                            className="relative w-full h-10 px-3 transition-all bg-white border-2 rounded outline-none appearance-none peer border-[#b3b4b6] text-[#4c4c4e] autofill:bg-white focus:border-[#ff5001] focus:focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
                           >
                             <option value="" disabled selected></option>
                             {cities.map((city) => (
@@ -599,14 +612,14 @@ const RegistrationStepper = () => {
                           </select>
                           <label
                             htmlFor="permanentcity"
-                            className="pointer-events-none absolute top-3 left-2 z-[1] px-2 text-[14px] text-[#4c4c4e] transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-required:after:text-[#000000] peer-valid:-top-2 peer-valid:text-[14px] peer-focus:-top-2 peer-focus:text-[14px] peer-focus:text-[#ff5001] peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+                            className="pointer-events-none absolute left-2 z-[1] -top-2 px-2 text-[14px] text-[#4c4c4e] transition-all before:absolute before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-required:after:text-[#000000] peer-valid:text-[14px] peer-focus:text-[14px] peer-focus:text-[#ff5001] peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-white"
                           >
                             City *
                           </label>
                         </div>
                       </div>
                     </div>
-                    <div className="w-[100%] mb-4" align="start">
+                    <div className="w-[100%] mb-[15px]" align="start">
                       <TextInput
                         id="perpincode"
                         type="tel"
@@ -620,102 +633,130 @@ const RegistrationStepper = () => {
                     </div>
                   </div>
 
-                  {!addessschecked ? (
-                    <div className="w-full" align="center">
-                      <label className="text-[#45474b] mb-4 text-[18px] font-semibold">
-                        Communication Address
-                      </label>
-                      <div className="w-[100%] mb-3">
-                        <TextareaInput
-                          id="tempaddress"
-                          name="tempaddess"
-                          label="Residental Address *"
-                          placeholder="Write your message"
-                          rows={3}
-                          required
-                          value={inputs.tempaddess}
-                          onChange={(e) => handleInput(e)}
-                        />
-                      </div>
-                      <div
-                        className="w-[100%] mb-4 flex justify-between"
-                        align="start"
-                      >
-                        <div className="w-[48%]">
-                          <div className="relative w-full">
-                            <select
-                              id="tempstate"
-                              name="tempstate"
-                              required
-                              onChange={handleStateChange}
-                              value={inputs.tempstate}
-                              className="relative w-full h-11 px-3 transition-all bg-white border-2 rounded outline-none appearance-none peer border-[#b3b4b6] text-[#4c4c4e] autofill:bg-white focus:border-[#ff5001] focus:focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                            >
-                              <option value="" disabled selected></option>
-                              {states.map((state) => (
-                                <option
-                                  key={state.isoCode}
-                                  value={state.isoCode}
-                                >
-                                  {state.name}
-                                </option>
-                              ))}
-                            </select>
-                            <label
-                              htmlFor="tempstate"
-                              className="pointer-events-none absolute top-3 left-2 z-[1] px-2 text-[14px] text-[#4c4c4e] transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-required:after:text-[#000000] peer-valid:-top-2 peer-valid:text-[14px] peer-focus:-top-2 peer-focus:text-[14px] peer-focus:text-[#ff5001] peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
-                            >
-                              State *
-                            </label>
-                          </div>
-                        </div>
+                  <div
+                    className="w-[90%] mb-[15px] flex justify-between items-center"
+                    align="start"
+                  >
+                    <CheckboxInput
+                      checked={addessschecked}
+                      id="bothaddress"
+                      label="Use Communication Address & Permanent Address as Same."
+                      onChange={() => {
+                        if (addessschecked) {
+                          setAddressChecked(false);
+                          setInputs({
+                            ...inputs,
+                            addressboth: false,
+                          });
+                          setInputs({
+                            ...inputs,
+                            tempaddess: inputs.peraddress,
+                            tempstate: inputs.perstate,
+                            tempincode: inputs.perpincode,
+                            tempcity: inputs.percity,
+                          });
+                        } else {
+                          setAddressChecked(true);
+                          setInputs({
+                            ...inputs,
+                            addressboth: true,
+                          });
+                        }
+                      }}
+                    />
+                  </div>
 
-                        <div className="w-[48%]">
-                          <div className="relative w-full">
-                            <select
-                              id="tempcity"
-                              name="tempcity"
-                              required
-                              value={inputs.tempcity}
-                              onChange={(e) => {
-                                setInputs({
-                                  ...inputs,
-                                  [e.target.name]: e.target.value,
-                                });
-                              }}
-                              disabled={!selectedState}
-                              className="relative w-full h-11 px-3 transition-all bg-white border-2 rounded outline-none appearance-none peer border-[#b3b4b6] text-[#4c4c4e] autofill:bg-white focus:border-[#ff5001] focus:focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                            >
-                              <option value="" disabled selected></option>
-                              {cities.map((city) => (
-                                <option key={city.name} value={city.name}>
-                                  {city.name}
-                                </option>
-                              ))}
-                            </select>
-                            <label
-                              htmlFor="tempcity"
-                              className="pointer-events-none absolute top-3 left-2 z-[1] px-2 text-[14px] text-[#4c4c4e] transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-required:after:text-[#000000] peer-valid:-top-2 peer-valid:text-[14px] peer-focus:-top-2 peer-focus:text-[14px] peer-focus:text-[#ff5001] peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
-                            >
-                              City *
-                            </label>
-                          </div>
+                  <div className="w-full" align="center">
+                    <label className="text-[#45474b] mb-[15px] text-[18px] font-semibold">
+                      Communication Address
+                    </label>
+                    <div className="w-[100%] mb-[15px]">
+                      <TextInput
+                        id="tempaddress"
+                        name="tempaddess"
+                        label="Residental Address *"
+                        placeholder="Write your message"
+                        rows={3}
+                        required
+                        value={inputs.tempaddess}
+                        onChange={(e) => handleInput(e)}
+                      />
+                    </div>
+                    <div
+                      className="w-[100%] mb-[15px] flex justify-between"
+                      align="start"
+                    >
+                      <div className="w-[48%]">
+                        <div className="relative w-full">
+                          <select
+                            id="tempstate"
+                            name="tempstate"
+                            required
+                            onChange={handleStateChange}
+                            value={inputs.tempstate}
+                            className="relative w-full h-11 px-3 transition-all bg-white border-2 rounded outline-none appearance-none peer border-[#b3b4b6] text-[#4c4c4e] autofill:bg-white focus:border-[#ff5001] focus:focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                          >
+                            <option value="" disabled selected></option>
+                            {states.map((state) => (
+                              <option key={state.isoCode} value={state.isoCode}>
+                                {state.name}
+                              </option>
+                            ))}
+                          </select>
+                          <label
+                            htmlFor="tempstate"
+                            className="pointer-events-none absolute left-2 z-[1] -top-2 px-2 text-[14px] text-[#4c4c4e] transition-all before:absolute before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-required:after:text-[#000000] peer-valid:text-[14px] peer-focus:text-[14px] peer-focus:text-[#ff5001] peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-white"
+                          >
+                            State *
+                          </label>
                         </div>
                       </div>
-                      <div className="w-[100%] mb-2" align="start">
-                        <TextInput
-                          id="pincode"
-                          type="tel"
-                          name="tempincode"
-                          placeholder="your name"
-                          label="Pincode *"
-                          required
-                          value={inputs.tempincode}
-                          onChange={(e) => handleInput(e)}
-                        />
+
+                      <div className="w-[48%]">
+                        <div className="relative w-full">
+                          <select
+                            id="tempcity"
+                            name="tempcity"
+                            required
+                            value={inputs.tempcity}
+                            onChange={(e) => {
+                              setInputs({
+                                ...inputs,
+                                [e.target.name]: e.target.value,
+                              });
+                            }}
+                            disabled={!selectedState}
+                            className="relative w-full h-11 px-3 transition-all bg-white border-2 rounded outline-none appearance-none peer border-[#b3b4b6] text-[#4c4c4e] autofill:bg-white focus:border-[#ff5001] focus:focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                          >
+                            <option value="" disabled selected></option>
+                            {cities.map((city) => (
+                              <option key={city.name} value={city.name}>
+                                {city.name}
+                              </option>
+                            ))}
+                          </select>
+                          <label
+                            htmlFor="tempcity"
+                            className="pointer-events-none absolute left-2 z-[1] -top-2 px-2 text-[14px] text-[#4c4c4e] transition-all before:absolute before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-required:after:text-[#000000] peer-valid:text-[14px] peer-focus:text-[14px] peer-focus:text-[#ff5001] peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-white"
+                          >
+                            City *
+                          </label>
+                        </div>
                       </div>
                     </div>
-                  ) : null}
+                    <div className="w-[100%] mb-2" align="start">
+                      <TextInput
+                        id="pincode"
+                        type="tel"
+                        name="tempincode"
+                        placeholder="your name"
+                        label="Pincode *"
+                        required
+                        value={inputs.tempincode}
+                        onChange={(e) => handleInput(e)}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
               <hr />
@@ -748,7 +789,7 @@ const RegistrationStepper = () => {
               <hr />
               <div className="w-full h-[73vh] overflow-auto">
                 <div
-                  className="w-[90%] mt-3 mb-4 flex justify-between"
+                  className="w-[90%] mt-3 mb-[15px] flex justify-between"
                   align="start"
                 >
                   <div className="w-[48%]">
@@ -778,7 +819,7 @@ const RegistrationStepper = () => {
                 </div>
 
                 <div
-                  className="w-[90%] mb-4 flex justify-between"
+                  className="w-[90%] mb-[15px] flex justify-between"
                   align="start"
                 >
                   <div className="w-[48%]">
@@ -814,7 +855,7 @@ const RegistrationStepper = () => {
                   </div>
                 </div>
 
-                <div className="w-[90%] mb-4" align="start">
+                <div className="w-[90%] mb-[15px]" align="start">
                   <TextInput
                     id="bp"
                     type="tel"
@@ -832,7 +873,7 @@ const RegistrationStepper = () => {
                       label={"Recent injuries / Accidents / Operations *"}
                     />
                   </div>
-                  <div className="flex w-[90%] gap-x-10 mt-2 mb-4">
+                  <div className="flex w-[90%] gap-x-10 mt-2 mb-[15px]">
                     <RadioButton
                       id="accidentyes"
                       value="yes"
@@ -862,7 +903,7 @@ const RegistrationStepper = () => {
                       required
                     />
                   </div>
-                  <div className="mb-4">
+                  <div className="mb-[15px]">
                     <TextareaInput
                       id="accidentdetail"
                       name="injuries"
@@ -885,7 +926,7 @@ const RegistrationStepper = () => {
                       label={"Recent breaks / Fractures / Sprains *"}
                     />
                   </div>
-                  <div className="flex w-[90%] gap-x-10 mt-2 mb-4">
+                  <div className="flex w-[90%] gap-x-10 mt-2 mb-[15px]">
                     <RadioButton
                       id="breaksyes"
                       value="yes"
@@ -915,7 +956,7 @@ const RegistrationStepper = () => {
                       required
                     />
                   </div>
-                  <div className="mb-4">
+                  <div className="mb-[15px]">
                     <TextareaInput
                       id="breaksdetail"
                       name="breaks"
@@ -929,7 +970,7 @@ const RegistrationStepper = () => {
                   </div>
                 </div>
 
-                <div className="w-[90%] mb-4">
+                <div className="w-[90%] mb-[15px]">
                   <div className="w-full">
                     <TextareaInput
                       id="otheractivities"
@@ -943,7 +984,7 @@ const RegistrationStepper = () => {
                   </div>
                 </div>
 
-                <div className="w-[90%] mb-4">
+                <div className="w-[90%] mb-[15px]">
                   <div className="w-full">
                     <TextareaInput
                       id="anythingelse"
@@ -957,8 +998,8 @@ const RegistrationStepper = () => {
                   </div>
                 </div>
 
-                <div className="w-[90%] mb-4">
-                  <SelectInput
+                <div className="w-[90%] mb-[15px]">
+                  {/* <SelectInput
                     id="preferabletiming"
                     name="preferabletiming"
                     label="Preferable Timing *"
@@ -966,7 +1007,7 @@ const RegistrationStepper = () => {
                     required
                     value={inputs.preferabletiming}
                     onChange={(e) => handleInput(e)}
-                  />
+                  /> */}
                 </div>
               </div>
               <hr />
@@ -1020,7 +1061,7 @@ const RegistrationStepper = () => {
                   ))}
                 </div>
 
-                <div className="w-[90%] mb-4">
+                <div className="w-[90%] mb-[15px]">
                   <TextareaInput
                     id="others"
                     name="others"
@@ -1032,7 +1073,7 @@ const RegistrationStepper = () => {
                   />
                 </div>
 
-                <div className="w-[90%] mb-4">
+                <div className="w-[90%] mb-[15px]">
                   <TextareaInput
                     id="medicationdetails"
                     name="medicaldetails"
@@ -1048,7 +1089,7 @@ const RegistrationStepper = () => {
                   <div>
                     <TextLabel label={"Under Physicians Care *"} />
                   </div>
-                  <div className="flex w-[90%] gap-x-10 mt-2 mb-4">
+                  <div className="flex w-[90%] gap-x-10 mt-2 mb-[15px]">
                     <RadioButton
                       id="careyes"
                       value="yes"
@@ -1078,7 +1119,7 @@ const RegistrationStepper = () => {
                       required
                     />
                   </div>
-                  <div className="mb-4">
+                  <div className="mb-[15px]">
                     <TextInput
                       id="doctorname"
                       type="text"
@@ -1092,7 +1133,7 @@ const RegistrationStepper = () => {
                       onChange={(e) => handleInput(e)}
                     />
                   </div>
-                  <div className="mt-3 mb-4">
+                  <div className="mt-3 mb-[15px]">
                     <TextInput
                       id="hospital"
                       type="text"
@@ -1112,12 +1153,14 @@ const RegistrationStepper = () => {
                   <div>
                     <TextLabel label={"Back Pain *"} />
                   </div>
-                  <div className="flex w-[90%] gap-x-10 mt-2 mb-4">
+                  <div className="flex w-[90%] gap-x-10 mt-2 mb-[15px]">
                     <RadioButton
                       id="backpainyes"
                       value="yes"
                       name="backpain"
-                      selectedOption={selectedOption.backpain === "yes" ? false : true}
+                      selectedOption={
+                        selectedOption.backpain === "yes" ? false : true
+                      }
                       onChange={(e) => {
                         setSelectedOption({
                           ...selectedOption,
@@ -1142,7 +1185,7 @@ const RegistrationStepper = () => {
                       required
                     />
                   </div>
-                  <div className="mb-4">
+                  <div className="mb-[15px]">
                     <SelectInput
                       id="pain"
                       name="gender"
@@ -1199,7 +1242,7 @@ const RegistrationStepper = () => {
               </div>
               <hr />
               <div className="w-full h-[73vh] overflow-auto">
-                <div className="w-[90%] mt-3 mb-4">
+                <div className="w-[90%] mt-3 mb-[15px]">
                   <TextareaInput
                     id="durationproblem"
                     name="duration"
@@ -1210,7 +1253,7 @@ const RegistrationStepper = () => {
                     onChange={(e) => handleInput(e)}
                   />
                 </div>
-                <div className="w-[90%] mb-4">
+                <div className="w-[90%] mb-[15px]">
                   <TextareaInput
                     id="relevantpasthistory"
                     name="past"
@@ -1221,7 +1264,7 @@ const RegistrationStepper = () => {
                     onChange={(e) => handleInput(e)}
                   />
                 </div>
-                <div className="w-[90%] mb-4">
+                <div className="w-[90%] mb-[15px]">
                   <TextareaInput
                     id="relevantfamilyhistory"
                     name="family"
@@ -1232,7 +1275,7 @@ const RegistrationStepper = () => {
                     onChange={(e) => handleInput(e)}
                   />
                 </div>
-                <div className="w-[90%] mb-4">
+                <div className="w-[90%] mb-[15px]">
                   <TextareaInput
                     id="anythingelsetherapy"
                     name="therapyanything"
@@ -1244,7 +1287,7 @@ const RegistrationStepper = () => {
                   />
                 </div>
 
-                <div className="w-[90%] mb-4">
+                <div className="w-[90%] mb-[15px]">
                   <div className="text-[#45474b] text-[16px] font-semibold text-justify">
                     Disclaimer (Please Read Carefully) I have given all
                     information relevant for yoga class. I Understand that the
@@ -1267,7 +1310,7 @@ const RegistrationStepper = () => {
                   </div>
                 </div>
 
-                <div className="w-[90%] mb-3">
+                <div className="w-[90%] mb-[15px]">
                   <CheckboxInput
                     checked={agreementchecked}
                     id="agreementchecked"

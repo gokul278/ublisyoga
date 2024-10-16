@@ -33,7 +33,7 @@ const TextareaInput = ({
         htmlFor={id}
         className={`cursor-text peer-focus:cursor-default absolute left-2 -top-2.5 z-[1] px-2 text-[14px] text-[#4c4c4e] transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all ${
           isInvalid ? "peer-invalid:text-pink-500" : "peer-focus:text-[#ff5001]"
-        } peer-placeholder-shown:top-3 peer-placeholder-shown:text-[14px] ${
+        } peer-placeholder-shown:text-[14px] ${
           required ? "peer-required:after:content-[]" : ""
         } peer-focus:-top-2.5 peer-focus:text-[14px] peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent`}
       >
