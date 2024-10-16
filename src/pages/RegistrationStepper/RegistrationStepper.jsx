@@ -197,20 +197,27 @@ const RegistrationStepper = () => {
   };
 
   const handleInput = (e) => {
-    setInputs({
-      ...inputs,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
 
-    if (inputs.addressboth) {
-      setInputs({
-        ...inputs,
-        tempaddess: inputs.peraddress,
-        tempstate: inputs.perstate,
-        tempincode: inputs.perpincode,
-        tempcity: inputs.percity,
-      });
+    // First, set the updated field value
+    let updatedInputs = {
+      ...inputs,
+      [name]: value,
+    };
+
+    // If the "addressboth" flag is true, copy the permanent address fields to temporary fields
+    if (updatedInputs.addressboth) {
+      updatedInputs = {
+        ...updatedInputs,
+        tempaddess: updatedInputs.peraddress,
+        tempstate: updatedInputs.perstate,
+        tempincode: updatedInputs.perpincode,
+        tempcity: updatedInputs.percity,
+      };
     }
+
+    // Set the final updated inputs
+    setInputs(updatedInputs);
   };
 
   const submitForm = () => {
@@ -643,22 +650,23 @@ const RegistrationStepper = () => {
                       label="Use Communication Address & Permanent Address as Same."
                       onChange={() => {
                         if (addessschecked) {
-                          setAddressChecked(false);
                           setInputs({
                             ...inputs,
+                            tempaddess: "",
+                            tempstate: "",
+                            tempincode: "",
+                            tempcity: "",
                             addressboth: false,
                           });
+                          setAddressChecked(false);
+                        } else {
+                          setAddressChecked(true);
                           setInputs({
                             ...inputs,
                             tempaddess: inputs.peraddress,
                             tempstate: inputs.perstate,
                             tempincode: inputs.perpincode,
                             tempcity: inputs.percity,
-                          });
-                        } else {
-                          setAddressChecked(true);
-                          setInputs({
-                            ...inputs,
                             addressboth: true,
                           });
                         }
@@ -904,18 +912,17 @@ const RegistrationStepper = () => {
                     />
                   </div>
                   <div className="mb-[15px]">
-                    <TextareaInput
+                  <TextInput
                       id="accidentdetail"
+                      type="text"
                       name="injuries"
+                      placeholder="your name"
                       label="Details"
-                      placeholder="Write your message"
-                      rows={2}
+                      value={inputs.injuries}
+                      onChange={(e) => handleInput(e)}
                       disabled={
                         selectedOption.accident === "yes" ? false : true
                       }
-                      value={inputs.injuries}
-                      onChange={(e) => handleInput(e)}
-                      required
                     />
                   </div>
                 </div>
@@ -957,6 +964,7 @@ const RegistrationStepper = () => {
                     />
                   </div>
                   <div className="mb-[15px]">
+                    
                     <TextareaInput
                       id="breaksdetail"
                       name="breaks"
